@@ -1,0 +1,40 @@
+{
+  "_comment": "Example debug config for hardware emulation. The kernel is simulated in RTL; host debugging works as usual, kernel-side requires Vitis Analyzer on the run_summary.",
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "milestone2_hw_emu",
+      "type": "gdb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_hybrid_lmhead",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--xclbin", "${workspaceFolder}/build/gemv_int8.hw_emu.xclbin",
+        "--checkpoint", "${workspaceFolder}/models/stories15M.bin",
+        "--tokenizer",  "${workspaceFolder}/models/tokenizer.bin",
+        "--prompt", "Once upon a time",
+        "--steps", "4",
+        "--temperature", "0.0",
+        "--use-fpga-lm-head",
+        "--compare-every-token",
+        "--verbose"
+      ],
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "env": {
+        "XCL_EMULATION_MODE": "hw_emu",
+        "XILINX_XRT": "${env:XILINX_XRT}",
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib:${env:LD_LIBRARY_PATH}"
+      },
+      "_prereqs": [
+        "make all TARGET=hw_emu DEVICE=xilinx_u50_gen3x16_xdma_5_202210_1",
+        "make emconfig TARGET=hw_emu DEVICE=xilinx_u50_gen3x16_xdma_5_202210_1",
+        "cp build/emconfig.json ."
+      ],
+      "_notes": [
+        "Build time: 5-20 min depending on machine.",
+        "If kernel-level timeline is needed, enable [Debug] device_trace=coarse in xrt.ini and open build/*.run_summary in Vitis Analyzer afterwards."
+      ]
+    }
+  ]
+}

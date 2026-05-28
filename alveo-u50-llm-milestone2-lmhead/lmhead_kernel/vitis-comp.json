@@ -1,0 +1,14 @@
+{
+  "name": "lmhead_kernel",
+  "type": "HLS",
+  "part": "xcu50-fsvh2104-2-e",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "lmhead_kernel"
+  },
+  "useSysrootToolchain": false,
+  "templateFlow": "VITIS"
+}

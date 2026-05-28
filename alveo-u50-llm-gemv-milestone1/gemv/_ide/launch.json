@@ -1,0 +1,45 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gemv_hw_emu",
+      "debugType": "gdb_hw_emu",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/gemv_host/build/gemv_host",
+      "applicationProjectDir": "${workspaceFolder}/gemv",
+      "arguments": "--xclbin ${workspaceFolder}/gemv/build/hw_emu/hw_link/gemv.xclbin --rows 128 --cols 128 --verbose",
+      "cwd": "${workspaceFolder}/gemv/build/hw_emu/gemv_hw_emu",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XCL_EMULATION_MODE": "hw_emu",
+        "XRT_INI_PATH": "${workspaceFolder}/gemv/gemv_host/runtime/hw_emu_xrt.ini",
+        "XCL_BIN_PATH": "${workspaceFolder}/gemv/build/hw_emu/hw_link",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    },
+    {
+      "name": "gemv_hw",
+      "debugType": "gdb_hw",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/gemv_host/build/gemv_host",
+      "applicationProjectDir": "${workspaceFolder}/gemv",
+      "arguments": "--xclbin ${workspaceFolder}/gemv/build/hw/hw_link/gemv.xclbin --rows 1024 --cols 1024",
+      "cwd": "${workspaceFolder}/gemv/build/hw/gemv_hw",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XRT_INI_PATH": "${workspaceFolder}/gemv/gemv_host/runtime/hw_xrt.ini",
+        "XCL_BIN_PATH": "${workspaceFolder}/gemv/build/hw/hw_link",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    }
+  ],
+  "compounds": []
+}

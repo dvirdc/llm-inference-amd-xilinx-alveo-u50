@@ -1,0 +1,51 @@
+# ===========================================================================
+#  Root .gitignore -- safety net across both milestones. Each milestone also
+#  has its own .gitignore for subtree-specific rules.
+# ===========================================================================
+
+# Build outputs (Makefile flow at root; Vitis IDE flow per-component)
+build/
+_x/
+.Xil/
+v++_*
+emconfig.json
+
+# Compiled FPGA / object artifacts
+*.xclbin
+*.xo
+*.o
+*.d
+*.a
+
+# Model checkpoints & tokenizers (downloaded, multi-MB -- never vendored)
+*.bin
+!**/.gitkeep
+
+# Vitis / clangd / IDE machine-specific caches.
+# We keep the authored debug configs (_ide/launch.json) but drop everything
+# else the IDE regenerates.
+**/_ide/*
+!**/_ide/launch.json
+.cache/
+compile_commands.json
+
+# v++ kernel work dirs
+gemv_kernel/gemv_kernel/
+lmhead_kernel/lmhead_kernel/
+
+# Profiling / report artifacts
+*.log
+*.jou
+*.csv
+*.compile_summary
+*.link_summary
+*.run_summary
+*.protoinst
+*.wdb
+*.wcfg
+
+# Cloned upstream reference (fetch with the provided script)
+third_party/llama2.c/
+
+# Stray dir from an unexpanded ${workspaceFolder} env var during a run
+**/${workspaceFolder}/

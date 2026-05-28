@@ -1,0 +1,53 @@
+{
+  "_comment": "Example debug config for real Alveo U50 hardware. DO NOT set XCL_EMULATION_MODE -- its presence is what flips XRT into emulation. Generation mode (no --validate-lm-head-only) is more useful here than validation, since hw runs are fast.",
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "milestone2_hw_generate",
+      "type": "gdb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_hybrid_lmhead",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--xclbin", "${workspaceFolder}/build/gemv_int8.hw.xclbin",
+        "--checkpoint", "${workspaceFolder}/models/stories15M.bin",
+        "--tokenizer",  "${workspaceFolder}/models/tokenizer.bin",
+        "--prompt", "Once upon a time",
+        "--steps", "32",
+        "--temperature", "0.0",
+        "--use-fpga-lm-head",
+        "--verbose"
+      ],
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "env": {
+        "XILINX_XRT": "${env:XILINX_XRT}",
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib:${env:LD_LIBRARY_PATH}"
+      },
+      "_prereqs": [
+        "make all TARGET=hw DEVICE=xilinx_u50_gen3x16_xdma_5_202210_1",
+        "xbutil examine   # confirm card is visible"
+      ]
+    },
+    {
+      "name": "milestone2_hw_validate_only",
+      "type": "gdb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_hybrid_lmhead",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--xclbin", "${workspaceFolder}/build/gemv_int8.hw.xclbin",
+        "--checkpoint", "${workspaceFolder}/models/stories15M.bin",
+        "--tokenizer",  "${workspaceFolder}/models/tokenizer.bin",
+        "--validate-lm-head-only",
+        "--verbose"
+      ],
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "env": {
+        "XILINX_XRT": "${env:XILINX_XRT}",
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib:${env:LD_LIBRARY_PATH}"
+      }
+    }
+  ]
+}

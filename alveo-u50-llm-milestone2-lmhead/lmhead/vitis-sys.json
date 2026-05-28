@@ -1,0 +1,65 @@
+{
+  "modelVersion": "1.0",
+  "projectName": "lmhead",
+  "platform": "xilinx_u50_gen3x16_xdma_5_202210_1",
+  "externalComponentRefs": [
+    "lmhead_host",
+    "lmhead_kernel"
+  ],
+  "components": [
+    {
+      "name": "hw_link",
+      "type": "HW_LINKER",
+      "configuration": {
+        "componentType": "HW_LINKER",
+        "containers": [
+          {
+            "name": "lmhead",
+            "kernels": {
+              "gemv_int8": "lmhead_kernel"
+            },
+            "userXoKernels": {},
+            "aieComponents": [],
+            "userAieLibadfList": [],
+            "userVssList": [],
+            "cfgFiles": [
+              "hw_link/lmhead-link.cfg"
+            ]
+          }
+        ],
+        "vppLinkerConfigurations": [
+          {
+            "configId": "hw_link.default",
+            "options": [],
+            "containerOptions": {},
+            "buildDatafiles": []
+          }
+        ]
+      },
+      "useSysrootToolchain": false,
+      "templateFlow": "VITIS"
+    }
+  ],
+  "buildConfigurations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "supportedTargets": [
+        "HW_EMU",
+        "HW"
+      ],
+      "componentConfigMap": {
+        "hw_link": "hw_link.default"
+      }
+    }
+  ],
+  "activeBuildConfigId": "default",
+  "prePackageCommand": "",
+  "postPackageCommand": "",
+  "preLinkerCommand": "",
+  "postLinkerCommand": "",
+  "isDirty": false,
+  "applicationFlow": "DATA_CENTER",
+  "templateFlow": "VITIS",
+  "buildOutputType": "UNKNOWN"
+}

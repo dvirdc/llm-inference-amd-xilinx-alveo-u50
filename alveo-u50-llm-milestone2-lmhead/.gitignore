@@ -1,0 +1,33 @@
+# Build outputs (root: Makefile flow; nested: Vitis IDE per-component)
+/build/
+**/build/
+/_x/
+/.Xil/
+**/.Xil/
+/v++_*
+**/v++_*
+/emconfig.json
+**/emconfig.json
+*.log
+*.jou
+*.compile_summary
+*.link_summary
+*.run_summary
+
+# Vitis IDE working state (regenerated)
+/_ide/
+# launch.json IS committed -- only IDE caches are ignored:
+**/_ide/logs/
+**/_ide/.wsdata/
+
+# v++ kernel work_dir lands under the kernel component
+/lmhead_kernel/lmhead_kernel/
+
+# Cloned reference -- not vendored into git
+/third_party/llama2.c/
+
+# Model files -- not in git (multi-GB)
+/models/*.bin
+
+# Generated lm_head dumps
+/lm_head*.bin

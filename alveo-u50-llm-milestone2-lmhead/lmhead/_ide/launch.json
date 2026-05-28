@@ -1,0 +1,84 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "lmhead_hw_emu_validate_only",
+      "debugType": "gdb_hw_emu",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/lmhead_host/build/lmhead_host",
+      "applicationProjectDir": "${workspaceFolder}/lmhead",
+      "arguments": "--xclbin ${workspaceFolder}/lmhead/build/hw_emu/hw_link/lmhead.xclbin --checkpoint ${workspaceFolder}/models/stories15M.bin --tokenizer ${workspaceFolder}/models/tokenizer.bin --validate-lm-head-only --verbose",
+      "cwd": "${workspaceFolder}",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XCL_EMULATION_MODE": "hw_emu",
+        "XRT_INI_PATH": "${workspaceFolder}/lmhead/lmhead_host/runtime/hw_emu_xrt.ini",
+        "XCL_BIN_PATH": "${workspaceFolder}/lmhead/build/hw_emu/hw_link",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    },
+    {
+      "name": "lmhead_hw_emu_generate",
+      "debugType": "gdb_hw_emu",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/lmhead_host/build/lmhead_host",
+      "applicationProjectDir": "${workspaceFolder}/lmhead",
+      "arguments": "--xclbin ${workspaceFolder}/lmhead/build/hw_emu/hw_link/lmhead.xclbin --checkpoint ${workspaceFolder}/models/stories15M.bin --tokenizer ${workspaceFolder}/models/tokenizer.bin --prompt \"Once upon a time\" --steps 4 --temperature 0.0 --use-fpga-lm-head --compare-every-token --verbose",
+      "cwd": "${workspaceFolder}",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XCL_EMULATION_MODE": "hw_emu",
+        "XRT_INI_PATH": "${workspaceFolder}/lmhead/lmhead_host/runtime/hw_emu_xrt.ini",
+        "XCL_BIN_PATH": "${workspaceFolder}/lmhead/build/hw_emu/hw_link",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    },
+    {
+      "name": "lmhead_hw_generate",
+      "debugType": "gdb_hw",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/lmhead_host/build/lmhead_host",
+      "applicationProjectDir": "${workspaceFolder}/lmhead",
+      "arguments": "--xclbin ${workspaceFolder}/lmhead/build/hw/hw_link/lmhead.xclbin --checkpoint ${workspaceFolder}/models/stories15M.bin --tokenizer ${workspaceFolder}/models/tokenizer.bin --prompt \"Once upon a time\" --steps 32 --temperature 0.0 --use-fpga-lm-head --verbose",
+      "cwd": "${workspaceFolder}",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XRT_INI_PATH": "${workspaceFolder}/lmhead/lmhead_host/runtime/hw_xrt.ini",
+        "XCL_BIN_PATH": "${workspaceFolder}/lmhead/build/hw/hw_link",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    },
+    {
+      "name": "lmhead_hw_validate_only",
+      "debugType": "gdb_hw",
+      "type": "gdb",
+      "request": "launch",
+      "target": "${workspaceFolder}/lmhead_host/build/lmhead_host",
+      "applicationProjectDir": "${workspaceFolder}/lmhead",
+      "arguments": "--xclbin ${workspaceFolder}/lmhead/build/hw/hw_link/lmhead.xclbin --checkpoint ${workspaceFolder}/models/stories15M.bin --tokenizer ${workspaceFolder}/models/tokenizer.bin --validate-lm-head-only --verbose",
+      "cwd": "${workspaceFolder}",
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "valuesFormatting": "prettyPrinters",
+      "env": {
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "XILINX_HLS": "${env:XILINX_VITIS}",
+        "XRT_INI_PATH": "${workspaceFolder}/lmhead/lmhead_host/runtime/hw_xrt.ini",
+        "XCL_BIN_PATH": "${workspaceFolder}/lmhead/build/hw/hw_link",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib"
+      }
+    }
+  ],
+  "compounds": []
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "Example debug config for software emulation. Copy into Vitis IDE Run/Debug configurations OR use as a guide when invoking xgdb directly from a terminal.",
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "milestone2_sw_emu",
+      "type": "gdb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/main_hybrid_lmhead",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "--xclbin", "${workspaceFolder}/build/gemv_int8.sw_emu.xclbin",
+        "--checkpoint", "${workspaceFolder}/models/stories15M.bin",
+        "--tokenizer",  "${workspaceFolder}/models/tokenizer.bin",
+        "--prompt", "Once upon a time",
+        "--steps", "4",
+        "--temperature", "0.0",
+        "--use-fpga-lm-head",
+        "--compare-every-token",
+        "--verbose"
+      ],
+      "gdbpath": "${env:XILINX_VITIS}/bin/xgdb",
+      "env": {
+        "XCL_EMULATION_MODE": "sw_emu",
+        "XILINX_XRT": "${env:XILINX_XRT}",
+        "XILINX_VITIS": "${env:XILINX_VITIS}",
+        "LD_LIBRARY_PATH": "${env:XILINX_XRT}/lib:${env:LD_LIBRARY_PATH}"
+      },
+      "_prereqs": [
+        "make all TARGET=sw_emu DEVICE=xilinx_u50_gen3x16_xdma_5_202210_1",
+        "make emconfig TARGET=sw_emu DEVICE=xilinx_u50_gen3x16_xdma_5_202210_1",
+        "cp build/emconfig.json ."
+      ]
+    }
+  ]
+}

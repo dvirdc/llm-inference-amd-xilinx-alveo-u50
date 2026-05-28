@@ -1,0 +1,5 @@
+# Vitis HLS work directory and per-build outputs.
+/gemv_kernel/
+/.Xil/
+*.log
+*.jou

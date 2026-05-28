@@ -1,0 +1,47 @@
+{
+  "name": "lmhead_host",
+  "type": "HOST",
+  "platform": "xilinx_u50_gen3x16_xdma_5_202210_1",
+  "domain": "x86_0",
+  "cpuInstance": "x86_0",
+  "cpuType": "x86",
+  "os": "linux",
+  "configuration": {
+    "componentType": "HOST",
+    "hostToolchainConfigurations": [
+      {
+        "configId": "default",
+        "compilerSymbols": [],
+        "compilerIncludes": [
+          "../src"
+        ],
+        "compilerOptions": [
+          "-std=c++17"
+        ],
+        "linkerLibraries": [
+          "uuid",
+          "xrt_coreutil"
+        ],
+        "linkerLibraryPaths": [],
+        "linkerOptions": [],
+        "x86CompilerSymbols": [],
+        "x86CompilerIncludes": [
+          "../src"
+        ],
+        "x86CompilerOptions": [
+          "-std=c++17"
+        ],
+        "x86LinkerLibraries": [
+          "uuid",
+          "xrt_coreutil"
+        ],
+        "x86LinkerLibraryPaths": [],
+        "x86LinkerOptions": []
+      }
+    ]
+  },
+  "domainRealName": "x86_0",
+  "useSysrootToolchain": false,
+  "applicationFlow": "DATA_CENTER",
+  "templateFlow": "VITIS"
+}
