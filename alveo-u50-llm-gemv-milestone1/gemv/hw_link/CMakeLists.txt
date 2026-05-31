@@ -15,8 +15,14 @@ gemv
 ####    START OF USER SETTINGS    ####
 # Below settings can be customized
 # Adding any other command line options to be passed to v++ --link
+#
+# --save-temps  keeps the v++ link temp tree (Vivado project + post-route
+#               DCP) under _x/link/vivado/vpl/prj/prj.runs/impl_1/. That's
+#               what you open in Vivado to see the true device-view
+#               floorplan (Window -> Device). Without this, v++ deletes
+#               the project after producing the xclbin.
 set(USER_CONTAINER_LINKER_OPTIONS
-""
+"--save-temps"
 )
 ####    Add any binary container specific linker options.    ####
 set(USER_gemv_OPTIONS
